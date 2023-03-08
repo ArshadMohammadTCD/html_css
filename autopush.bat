@@ -1,7 +1,6 @@
 echo off
 :start
-git add -A
-git commit -m "Autopush %time%"
+python .\commiter.py
 git push origin main
 timeout 10
 goto start
