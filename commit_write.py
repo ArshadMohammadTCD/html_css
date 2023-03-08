@@ -6,7 +6,7 @@ diff_output = repo.git.diff('./')
 
 prompt_for_GPT="  Here is a git diff, it has information about what lines have been changed, could you write a simple an concise git commit message such that anyone reading can get a rough idea of what this git commit was about?. Also please just return the value as a String with no qoutation marks. \n " + diff_output
 print(prompt_for_GPT)
-openai.api_key = "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"
+openai.api_key = "InsertKey"
 
 # list models
 models = openai.Model.list()
