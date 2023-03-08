@@ -1,18 +1,21 @@
-import sys
-inFile = sys.argv[1]
-outFile = sys.argv[2]
+from git import Repo
+import openai
+repo = Repo('./')
+diff_output = repo.git.diff('./')
 
 
+prompt_for_GPT="  Here is a git diff, it has information about what lines have been changed, could you write a simple an concise git commit message such that anyone reading can get a rough idea of what this git commit was about?. Also please just return the value as a String with no qoutation marks. \n " + diff_output
+print(prompt_for_GPT)
+openai.api_key = "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"
 
-with open(inFile,'r') as i:
-    lines = i.readlines()
+# list models
+models = openai.Model.list()
 
-processedLines = manipulateData(lines)
+# print the first model's id
+print(models.data[0].id)
 
-with open(outFile,'w') as o:
-    for line in processedLines:
-        o.write(line)
+# create a completion
+completion = openai.Completion.create(model="text-davinci-003", prompt=prompt_for_GPT)
 
-
-
-manipulateData()
+# print the completion
+print(completion.choices[0].text)
